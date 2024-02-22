@@ -22,7 +22,7 @@ function EventDetailPage() {
       </Suspense>
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
         <Await resolve={events}>
-          {(loadedEvents) => <EventsList event={loadedEvents} />}
+          {(loadedEvents) => <EventsList events={loadedEvents} />}
         </Await>
       </Suspense>
     </>
@@ -51,7 +51,7 @@ async function loadEvents() {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    return json(
+    throw json(
       { message: "Could not fetch events." },
       {
         status: 500,
@@ -68,7 +68,7 @@ export async function loader({ request, params }) {
 
   // helpful for a slow backend and you want to show multple pieces of data at different times/before the data has loaded
   return defer({
-    event: await loadEvents(id),
+    event: await loadEvent(id),
     events: loadEvents(),
   });
 }
@@ -86,7 +86,6 @@ export async function action({ params, request }) {
         status: 500,
       },
     );
-  } else {
-    return redirect("/events");
   }
+  return redirect("/events");
 }
