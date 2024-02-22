@@ -66,6 +66,7 @@ async function loadEvents() {
 export async function loader({ request, params }) {
   const id = params.eventId;
 
+  // helpful for a slow backend and you want to show multple pieces of data at different times/before the data has loaded
   return defer({
     event: await loadEvents(id),
     events: loadEvents(),
