@@ -6,9 +6,7 @@ function EventItem({ event }) {
   const submit = useSubmit();
 
   function startDeleteHandler() {
-    const proceed = window.confirm(
-      "Are you sure you want to delete this event?",
-    );
+    const proceed = window.confirm("Are you sure?");
 
     if (proceed) {
       submit(null, { method: "delete" });
@@ -22,7 +20,7 @@ function EventItem({ event }) {
       <time>{event.date}</time>
       <p>{event.description}</p>
       <menu className={classes.actions}>
-        <Link to={"edit"}>Edit</Link>
+        <Link to="edit">Edit</Link>
         <button onClick={startDeleteHandler}>Delete</button>
       </menu>
     </article>

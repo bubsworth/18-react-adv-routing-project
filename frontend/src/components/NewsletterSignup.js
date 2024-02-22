@@ -1,10 +1,9 @@
-import { useFetcher } from "react-router-dom";
 import { useEffect } from "react";
+import { useFetcher } from "react-router-dom";
 
 import classes from "./NewsletterSignup.module.css";
 
 function NewsletterSignup() {
-  // fetcher used when you want to trigger a loader or action without navigating to the page
   const fetcher = useFetcher();
   const { data, state } = fetcher;
 

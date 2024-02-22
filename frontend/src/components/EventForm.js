@@ -1,6 +1,6 @@
 import {
-  useNavigate,
   Form,
+  useNavigate,
   useNavigation,
   useActionData,
   json,
@@ -66,7 +66,7 @@ function EventForm({ method, event }) {
           name="description"
           rows="5"
           required
-          defaultValue={event ? event.Description : ""}
+          defaultValue={event ? event.description : ""}
         />
       </p>
       <div className={classes.actions}>
@@ -98,7 +98,7 @@ export async function action({ request, params }) {
 
   if (method === "PATCH") {
     const eventId = params.eventId;
-    url = "http://localhost:8080/events" + eventId;
+    url = "http://localhost:8080/events/" + eventId;
   }
 
   const response = await fetch(url, {
@@ -109,7 +109,7 @@ export async function action({ request, params }) {
     body: JSON.stringify(eventData),
   });
 
-  if (response.statusCode === 422) {
+  if (response.status === 422) {
     return response;
   }
 
